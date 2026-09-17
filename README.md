@@ -8,9 +8,9 @@ L'objectif est de permettre aux utilisateurs d'explorer la carte, de consulter l
 
 # Équipe
 
-HUBERT Jean-Baptiste
-Martinez Corral Manolo
-Condamine Thibault
+- HUBERT Jean-Baptiste
+- Martinez Corral Manolo
+- Condamine Thibault
 
 # Objectif du projet
 
@@ -87,12 +87,12 @@ Wamp ou un équivalent permettant de lancer PHP et MySQL.
 
 Lorsque le projet sera prêt à être lancé en local, les étapes prévues seront :
 
-Récupérer le projet depuis GitHub.
-Mettre en place l'environnement PHP/Apache.
-Créer la base de données MySQL.
-Importer la structure de la base de données.
-Configurer la connexion entre PHP et MySQL.
-Lancer le serveur local.
-Accéder au projet depuis un navigateur.
+Récupérer le projet depuis GitHub.  
+Mettre en place l'environnement PHP/Apache.  
+Créer la base de données MySQL.  
+Importer la structure de la base de données.  
+Configurer la connexion entre PHP et MySQL.  
+Lancer le serveur local.  
+Accéder au projet depuis un navigateur.  
 
 
