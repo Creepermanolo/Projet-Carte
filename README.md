@@ -53,6 +53,67 @@ L'utilisateur peut par exemple choisir d'afficher uniquement :
 
 Les filtres ont pour objectif d'éviter de surcharger la carte lorsque plusieurs catégories sont affichées simultanément.
 
+Intégration de la carte du DLC The Delicious Last Course.  
+Gestion des zones du jeu principal et du DLC.  
+Possibilité de naviguer entre les différentes zones/îles.  
+
+Traqueur de progression
+L'utilisateur pourra suivre son avancement dans le jeu grâce à un système de progression personnel.
+
+Le traqueur permettra notamment de :
+
+- Marquer les niveaux découverts.
+- Marquer les niveaux terminés.
+- Suivre les boss vaincus.
+- Suivre les PNJ rencontrés.
+- Suivre les objets et secrets découverts.
+- Suivre les niveaux Run & Gun terminés.
+- Suivre les éléments du DLC découverts.
+- Visualiser son pourcentage de progression.
+- Sauvegarder automatiquement sa progression après connexion.
+
+Système de découverte
+Certaines parties de la carte pourront être masquées tant que l'utilisateur ne les a pas découvertes.
+
+Les zones non découvertes pourront être :
+
+- floutées ;
+- grisées ;
+- masquées ;
+
+ou affichées avec un niveau de détail réduit.
+
+Lorsqu'une zone est découverte, elle devient progressivement visible.
+
+Le système sera lié au traqueur de progression afin de sauvegarder les zones déjà découvertes par l'utilisateur.
+
+Un menu permettra à l'utilisateur de changer le mode d'interaction avec la carte :
+
+- Mode édition : ajouter ou modifier des éléments lorsque les droits de l'utilisateur le permettent.
+
+- Mode déplacement : naviguer sur la carte avec du drag & drop.
+
+- Menu contextuel : accéder aux informations et actions disponibles sur un élément.
+
+Navigation de la carte
+La carte devra permettre :
+
+- un zoom libre ;
+- un déplacement libre de la carte ;
+- une navigation par zones ;
+- un accès rapide aux différentes îles/zones ;
+- une indication lorsqu'une zone n'est pas encore débloquée.
+
+Gestion des informations découvertes
+Certaines informations pourront être masquées tant que l'utilisateur ne les a pas découvertes.
+
+Une information pourra avoir différents états :
+
+- Non découverte
+- Découverte
+- Complétée
+
+
 # Fonctionnalités utilisateur
 
 Après connexion, l'utilisateur pourra :
