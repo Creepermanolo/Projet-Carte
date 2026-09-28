@@ -1,24 +1,24 @@
 # Projet-Carte
 
-# Présentation
+## Présentation
 
 Cuphead Interactive Map est une carte interactive dédiée à l'univers du jeu vidéo Cuphead.
 
 L'objectif est de permettre aux utilisateurs d'explorer la carte, de consulter les différents points d'intérêt et, après connexion, de personnaliser leur expérience en ajoutant des points, en commentant les éléments présents et en suivant leur progression.
 
-# Équipe
+## Équipe
 
 - HUBERT Jean-Baptiste
 - Martinez Corral Manolo
 - Condamine Thibault
 
-# Objectif du projet
+## Objectif du projet
 
 L'objectif de ce projet est de créer une carte interactive permettant aux utilisateurs d'explorer l'univers de Cuphead de manière simple et intuitive.
 
 Le projet a également pour objectif de mettre en pratique différentes compétences en développement web, notamment la gestion d'utilisateurs, la manipulation d'une base de données, les interactions JavaScript et la création d'une interface web dynamique.
 
-# Fonctionnalités
+## Fonctionnalités
 
 La fonctionnalité principale du projet est une carte permettant de naviguer dans les différentes zones du jeu.
 
@@ -39,7 +39,7 @@ Points d'intérêt créés par les utilisateurs
 
 L'utilisateur peut cliquer sur un marqueur afin d'afficher les informations associées au point.
 
-Filtres
+### Filtres
 Un système de filtres permet de contrôler les éléments affichés sur la carte.
 
 L'utilisateur peut par exemple choisir d'afficher uniquement :
@@ -57,7 +57,7 @@ Intégration de la carte du DLC The Delicious Last Course.
 Gestion des zones du jeu principal et du DLC.  
 Possibilité de naviguer entre les différentes zones/îles.  
 
-Traqueur de progression
+### Traqueur de progression
 L'utilisateur pourra suivre son avancement dans le jeu grâce à un système de progression personnel.
 
 Le traqueur permettra notamment de :
@@ -72,7 +72,7 @@ Le traqueur permettra notamment de :
 - Visualiser son pourcentage de progression.
 - Sauvegarder automatiquement sa progression après connexion.
 
-Système de découverte
+### Système de découverte  
 Certaines parties de la carte pourront être masquées tant que l'utilisateur ne les a pas découvertes.
 
 Les zones non découvertes pourront être :
@@ -95,7 +95,7 @@ Un menu permettra à l'utilisateur de changer le mode d'interaction avec la cart
 
 - Menu contextuel : accéder aux informations et actions disponibles sur un élément.
 
-Navigation de la carte
+### Navigation de la carte
 La carte devra permettre :
 
 - un zoom libre ;
@@ -104,7 +104,7 @@ La carte devra permettre :
 - un accès rapide aux différentes îles/zones ;
 - une indication lorsqu'une zone n'est pas encore débloquée.
 
-Gestion des informations découvertes
+### Gestion des informations découvertes
 Certaines informations pourront être masquées tant que l'utilisateur ne les a pas découvertes.
 
 Une information pourra avoir différents états :
@@ -114,7 +114,7 @@ Une information pourra avoir différents états :
 - Complétée
 
 
-# Fonctionnalités utilisateur
+## Fonctionnalités utilisateur
 
 Après connexion, l'utilisateur pourra :
 
@@ -124,7 +124,7 @@ Après connexion, l'utilisateur pourra :
 - Créer des listes personnalisées de points d'intérêt
 - Sauvegarder certains points
 
-# Outils et languages utilisés
+## Outils et languages utilisés
 
 Pour la gestion:
 
@@ -140,7 +140,7 @@ Les languages utilisés:
 - JavaScript
 - MySQL
 
-# Installation
+## Installation
 
 Pour utiliser le projet, vous devez avoir installé :
 
