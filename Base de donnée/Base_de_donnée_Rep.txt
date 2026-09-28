@@ -1,0 +1,61 @@
+BDD  My_map
+
+Tables :
+
+Users :
+user_mail Varchar(50);
+password Varchar(50);
+name Varchar(50);
+user_id int (Primary key)
+
+
+Maps :
+map_id int (Primary key);
+name Varchar(50);
+game_name Varchar(50);
+description Varchar(255);
+image Varchar(255)
+
+
+Map_Zones :
+zone_id int (Primary key);
+map_id int (Foreign key);
+name Varchar(50);
+description_zone Varchar(255)
+
+
+POI_Types :
+poi_type_id int (Primary key);
+name Varchar(50)
+
+
+Points_of_Interest :
+poi_id int (Primary key);
+map_id int (Foreign key);
+zone_id int (Foreign key);
+poi_type_id int (Foreign key);
+name Varchar(50);
+description Varchar(255);
+position int (x, y)
+
+User_POI_Progress :
+user_id int (Foreign key);
+poi_id int (Foreign key);
+status Enum();
+discovered_at Datetime;
+completed_at Datetime;
+
+Comments :
+comment_id int (Primary key)
+user_id int (Foreign key);
+poi_id int (Foreign key);
+content Varchar(255);
+created_at Datetime;
+updated_at Datetime;
+
+Lists :
+list_id int (Primary key)
+user_id int (Foreign key);
+name Varchar(50);
+description Varchar(255);
+
