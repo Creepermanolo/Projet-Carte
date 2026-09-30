@@ -3,17 +3,17 @@ BDD  My_map
 Tables :
 
 Users :
-user_mail Varchar(50);
-password Varchar(50);
-name Varchar(50);
-user_id int (Primary key)
+user_mail Varchar(255) UNIQUE NOT NULL;
+password Varchar(255) NOT NULL;
+name Varchar(50) NOT NULL;
+user_id int (Primary key) Auto_Increment
 
 
 Maps :
 map_id int (Primary key);
 name Varchar(50);
 game_name Varchar(50);
-description Varchar(255);
+description TEXT;
 image Varchar(255)
 
 
@@ -21,13 +21,14 @@ Map_Zones :
 zone_id int (Primary key);
 map_id int (Foreign key);
 name Varchar(50);
-description_zone Varchar(255)
+description_zone TEXT;
+is_locked bool
 
 
 POI_Types :
 poi_type_id int (Primary key);
-name Varchar(50)
-
+name Varchar(50);
+color VARCHAR(7)
 
 Points_of_Interest :
 poi_id int (Primary key);
@@ -35,26 +36,70 @@ map_id int (Foreign key);
 zone_id int (Foreign key);
 poi_type_id int (Foreign key);
 name Varchar(50);
-description Varchar(255);
-position int (x, y)
+description TEXT;
+position_x int;
+position_y int;
+created_at DATETIME;
+updated_at DATETIME;
+created_by INT FK;
+
+
+Boss_Details :
+boss_id int PK;
+poi_id int FK;
+lore TEXT;
+particularities TEXT;
+statistics TEXT;
+tips TEXT
+
+
+NPC_Details :
+npc_id int PK;
+poi_id int FK;
+description TEXT;
+
+
+Items :
+item_id int pk;
+name Varchar(50);
+description TEXT;
+image Varchar(255);
+price int
+
+
+Merchant_Items :
+poi_id int FK;
+item_id itn FK;
+price int
+
 
 User_POI_Progress :
 user_id int (Foreign key);
 poi_id int (Foreign key);
-status Enum();
+status Enum('not_discovered','discovered', 'completed');
 discovered_at Datetime;
 completed_at Datetime;
+
 
 Comments :
 comment_id int (Primary key)
 user_id int (Foreign key);
 poi_id int (Foreign key);
-content Varchar(255);
+content TEXT;
 created_at Datetime;
 updated_at Datetime;
+
 
 Lists :
 list_id int (Primary key)
 user_id int (Foreign key);
 name Varchar(50);
 description Varchar(255);
+
+
+List_POIs :
+list_id INT FK;
+poi_id INT FK;
+
+
+
