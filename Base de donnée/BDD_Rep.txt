@@ -6,7 +6,8 @@ Users :
 user_mail Varchar(255) UNIQUE NOT NULL;
 password Varchar(255) NOT NULL;
 name Varchar(50) NOT NULL;
-user_id int (Primary key) Auto_Increment
+user_id int (Primary key) Auto_Increment;
+Max_zone int
 
 
 Maps :
@@ -22,13 +23,14 @@ zone_id int (Primary key);
 map_id int (Foreign key);
 name Varchar(50);
 description_zone TEXT;
-is_locked bool
+order int constraint 0 - 5
 
 
 POI_Types :
 poi_type_id int (Primary key);
 name Varchar(50);
-color VARCHAR(7)
+color VARCHAR(9)
+
 
 Points_of_Interest :
 poi_id int (Primary key);
@@ -94,7 +96,7 @@ Lists :
 list_id int (Primary key)
 user_id int (Foreign key);
 name Varchar(50);
-description Varchar(255);
+description TEXT;
 
 
 List_POIs :
@@ -102,4 +104,6 @@ list_id INT FK;
 poi_id INT FK;
 
 
-
+List_POIs
+Merchant_Items
+User_POI_Progress
