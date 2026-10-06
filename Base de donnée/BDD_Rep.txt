@@ -71,7 +71,7 @@ price int
 
 Merchant_Items :
 poi_id int FK;
-item_id itn FK;
+item_id int FK;
 price int
 
 
@@ -84,7 +84,7 @@ completed_at Datetime;
 
 
 Comments :
-comment_id int (Primary key)
+int (Primary key)
 user_id int (Foreign key);
 poi_id int (Foreign key);
 content TEXT;
@@ -103,7 +103,3 @@ List_POIs :
 list_id INT FK;
 poi_id INT FK;
 
-
-List_POIs
-Merchant_Items
-User_POI_Progress
