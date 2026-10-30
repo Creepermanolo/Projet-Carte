@@ -3,7 +3,7 @@ create database My_map;
 use My_map;
 
 CREATE TABLE Users(
-   user_id INT,
+   user_id INT Auto_Increment,
    user_mail VARCHAR(255) NOT NULL,
    password VARCHAR(255) NOT NULL,
    name VARCHAR(50) NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE Users(
 );
 
 CREATE TABLE Maps(
-   map_id INT,
+   map_id INT Auto_Increment,
    game_name VARCHAR(50) NOT NULL,
    description TEXT,
    image VARCHAR(255),
@@ -21,7 +21,7 @@ CREATE TABLE Maps(
 );
 
 CREATE TABLE Map_Zones(
-   zone_id INT,
+   zone_id INT Auto_Increment,
    map_id INT NOT NULL,
    name VARCHAR(50) NOT NULL,
    description TEXT,
@@ -31,7 +31,7 @@ CREATE TABLE Map_Zones(
 );
 
 CREATE TABLE POI_Types(
-   poi_type_id INT,
+   poi_type_id INT Auto_Increment,
    name VARCHAR(50) NOT NULL,
    color VARCHAR(9) NOT NULL,
    PRIMARY KEY(poi_type_id),
@@ -39,7 +39,7 @@ CREATE TABLE POI_Types(
 );
 
 CREATE TABLE Items(
-   item_id INT,
+   item_id INT Auto_Increment,
    name VARCHAR(50) NOT NULL,
    description TEXT,
    image VARCHAR(255),
@@ -48,7 +48,7 @@ CREATE TABLE Items(
 );
 
 CREATE TABLE Lists(
-   list_id INT,
+   list_id INT Auto_Increment,
    user_id INT NOT NULL,
    name VARCHAR(50) NOT NULL,
    description TEXT,
@@ -58,7 +58,7 @@ CREATE TABLE Lists(
 );
 
 CREATE TABLE Points_of_Interest(
-   poi_id INT,
+   poi_id INT Auto_Increment,
    map_id INT NOT NULL,
    zone_id INT NOT NULL,
    poi_type_id INT NOT NULL,
@@ -77,7 +77,7 @@ CREATE TABLE Points_of_Interest(
 );
 
 CREATE TABLE Comments(
-   comment_id INT,
+   comment_id INT Auto_Increment,
    user_id INT NOT NULL,
    poi_id INT NOT NULL,
    content TEXT NOT NULL,
@@ -89,7 +89,7 @@ CREATE TABLE Comments(
 );
 
 CREATE TABLE Boss_Details(
-   boss_id INT,
+   boss_id INT Auto_Increment,
    poi_id INT NOT NULL,
    lore TEXT,
    particularities TEXT,
@@ -100,7 +100,7 @@ CREATE TABLE Boss_Details(
 );
 
 CREATE TABLE NPC_details(
-   npc_id INT,
+   npc_id INT Auto_Increment,
    poi_id INT NOT NULL,
    description TEXT,
    PRIMARY KEY(npc_id),
@@ -200,9 +200,9 @@ VALUES
    (1, 1, 1, 'Un boss assez facile pour commencer.', '2026-10-06 10:30:00', NULL);
 
 INSERT INTO Lists
-   (list_id, user_id, name, description)
+   (list_id, user_id, name, description, color)
 VALUES
-   (1, 1, 'Boss à battre', 'Liste des boss à battre.');
+   (1, 1, 'Boss à battre', 'Liste des boss à battre.', '#7F00FF');
 
 INSERT INTO Boss_Details
    (boss_id, poi_id, lore, particularities, statistics, tips)
@@ -260,7 +260,7 @@ VALUES
    (12, 1, 'Ginger, personnage en forme de fille en pain d’épices, se trouve près du niveau de Wally Warbles. Elle demande au joueur de trouver un raccourci secret permettant de traverser l’île. Lorsque le joueur découvre ce passage et revient lui parler, elle lui offre un cadeau en récompense.'),
    (13, 1, 'Buster, personnage jongleur situé près du niveau du dragon Grim Matchstick, propose un défi au joueur. Il lui demande d’effectuer quatre parades consécutives sans toucher le sol. Une fois le défi réussi, le joueur peut revenir lui parler pour recevoir un cadeau en récompense.'),
    (14, 1, 'Tully, est une tortue installée près du rivage. Il propose un défi consistant à terminer les niveaux Run and Gun sans éliminer d’ennemis. Ce défi permet de débloquer un filtre qui va complètement changé les couleurs.'),
-   (15, 1, 'Silverworth, est une fourche argentée portant un costume rouge et un monocle. Il propose au joueur d’obtenir le rang A− ou supérieur dans les différents niveaux concernés pour débloquer un filtre visuel.'),
+   (15, 1, 'Silverworth, est une fourche argentée portant un costume rouge et un monocle. Il propose au joueur d’obtenir le rang A- ou supérieur dans les différents niveaux concernés pour débloquer un filtre visuel.'),
    (16, 1, 'Cora,  est une jeune pirate aux cheveux turquoise et aux vêtements rouges, située près de la plage. Elle conseille à Cuphead et Mugman de varier leurs armes selon les ennemis rencontrés.'),
    (17, 1, 'Ludwig est un phonographe qui préfère la musique minimaliste. Il reproche à Wolfgang de compliquer inutilement les mélodies et demande au joueur de le convaincre que « moins, c’est plus ». En lui reparlant après avoir suivi ses indications, le joueur peut débloquer une musique.'),
    (18, 1, 'Wolfgang est une vieille radio qui préfère les musiques riches et complexes. Il critique Ludwig et sa philosophie minimaliste, puis avertit Cuphead et Mugman de ne pas l’écouter. En poursuivant les échanges entre les deux personnages, il est possible de revenir à la musique originale.'),
@@ -300,3 +300,12 @@ INSERT INTO User_POI_Progress
    (user_id, poi_id, status, discovered_at, completed_at)
 VALUES
    (1, 1, 'completed', '2026-10-06 11:00:00', '2026-10-06 11:30:00');
+   
+   
+
+#Test avec quelque requête simple:
+
+Select * From Boss_Details Where boss_id = 7;
+Select * From Items Order by price DESC;
+Select * From Map_Zones Order by order_ ASC;
+Select boss.boss_id, boss.lore, boss.statistics, boss.tips From Boss_Details boss Join Points_of_Interest points On boss.poi_id = points.poi_id;
