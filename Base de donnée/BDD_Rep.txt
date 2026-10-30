@@ -12,7 +12,6 @@ Max_zone int
 
 Maps :
 map_id int (Primary key);
-name Varchar(50);
 game_name Varchar(50);
 description TEXT;
 image Varchar(255)
@@ -44,7 +43,7 @@ position_y int;
 created_at DATETIME;
 updated_at DATETIME;
 created_by INT FK;
-
+comment_id Int
 
 Boss_Details :
 boss_id int PK;
@@ -102,4 +101,7 @@ description TEXT;
 List_POIs :
 list_id INT FK;
 poi_id INT FK;
+
+
+
 
