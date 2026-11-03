@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylecarte.css">
+    <title>Document</title>
+</head>
+<body>
+    <svg
+  width="0"
+  height="0"
+  aria-hidden="true"
+  style="position: absolute; pointer-events: none"
+>
+  <defs>
+    <filter
+      id="rgb-split"
+      x="0%" y="0%"
+      width="100%" height="100%"
+      color-interpolation-filters="sRGB"
+    >
+      <!-- Rouge : décalé à gauche -->
+      <feColorMatrix
+        in="SourceGraphic"
+        type="matrix"
+        values="1 0 0 0 0
+                0 0 0 0 0
+                0 0 0 0 0
+                0 0 0 1 0"
+        result="red"
+      />
+      <feOffset in="red" dx="-0.5" dy="-0.5" result="red-shift" />
+
+      <!-- Vert : position initiale -->
+
+      <!-- Bleu : décalé à droite -->
+      <feColorMatrix
+        in="SourceGraphic"
+        type="matrix"
+        values="0 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                0 0 0 1 0"
+        result="blue"
+      />
+      <feOffset in="blue" dx="0.5" dy="0.5" result="cyan-shift" />
+
+      <!-- Recomposition -->
+      <feBlend in="red-shift" in2="cyan-shift" mode="screen" result="rg" />
+    </filter>
+  </defs>
+</svg>
+
+<div id="page">
+  <div class="side">
+        <div style="display: flex; flex-direction: row; align-items: center;margin-bottom: 1vh;">
+            <img style="width: 50%; height:50%;" src="logo.png">
+            <h1>Interactive Map</h1>
+        </div>
+        <form id="searchForm" autocomplete="off">
+            <div class="search-line">          
+                <div class="search-box">
+                    <span class="search-icon">⌕</span>
+                    <input type="search" id="search" placeholder="chercher" aria-autocomplete="list"
+                        aria-controls="suggestions" required>
+                        <ul id="suggestions" role="listbox"></ul>
+                </div>
+                <button type="submit">Rechercher</button>
+            </div>
+        </form>
+        <div id="info">
+            <h1>Boss</h1>
+            <p>Lorem Ipsum dolor sit amet</p>
+</div>
+    
+
+        </div>
+        <img
+    class="texture-overlay"
+    src="bruit.png"
+    alt=""
+    aria-hidden="true"
+    style=" position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    z-index: 9999;
+    pointer-events: none;
+
+    mix-blend-mode: normal;
+    opacity: 0.5;"
+>
+    </div>
+</body>
+</html>
+
