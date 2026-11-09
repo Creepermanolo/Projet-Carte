@@ -1,0 +1,536 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Cuphead Map Editor</title>
+
+    <link rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+
+        #map {
+            width: 100%;
+            height: 75vh;
+            min-height: 400px;
+            background: #69a0ca;
+        }
+
+        #controls {
+            padding: 15px;
+            background: #eeeeee;
+        }
+
+        button {
+            padding: 9px 13px;
+            margin: 3px;
+            cursor: pointer;
+            border: 1px solid #999;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background: #ddd;
+        }
+
+        #coordinates {
+            width: 100%;
+            height: 180px;
+            margin-top: 10px;
+            box-sizing: border-box;
+            font-family: monospace;
+        }
+
+        #status {
+            margin: 10px 3px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="map"></div>
+
+    <div id="controls">
+
+        <h3>Éditeur de polygones Cuphead</h3>
+
+        <button onclick="startPolygon()">
+            Nouveau polygone
+        </button>
+
+        <button onclick="finishPolygon()">
+            Terminer
+        </button>
+
+        <button onclick="undoPoint()">
+            Annuler dernier point
+        </button>
+
+        <button onclick="clearPolygon()">
+            Effacer en cours
+        </button>
+
+        <button onclick="copyPolygonCode()">
+            Copier le code
+        </button>
+
+        <div id="status">
+            En attente
+        </div>
+
+        <textarea id="coordinates" readonly
+            placeholder="Les coordonnées apparaîtront ici...">
+        </textarea>
+
+    </div>
+
+
+<script>
+
+// ==================================================
+// INITIALISATION DE LA CARTE
+// ==================================================
+
+// Dimensions réelles de l'image
+
+const imageWidth = 5830;
+const imageHeight = 2868;
+
+// Initialisation en coordonnées pixels
+
+const map = L.map('map', {
+    crs: L.CRS.Simple,
+    minZoom: -2,
+    maxZoom: 2,
+    zoomSnap: 0.1
+});
+
+// Limites de l'image
+
+const bounds = [
+    [0, 0],
+    [imageHeight, imageWidth]
+];
+
+// Affichage de l'image
+
+L.imageOverlay(
+    'Cuphead_map.png',
+    bounds
+).addTo(map);
+
+// Ajustement automatique
+
+map.fitBounds(bounds);
+map.setMaxBounds(bounds);
+
+
+// ==================================================
+// ÉLÉMENTS EXISTANTS
+// ==================================================
+
+// Marqueur
+
+const marker = L.marker([
+    imageHeight - 2288,
+    694
+]).addTo(map);
+
+marker.bindPopup(
+    "<b>Hello !</b><br>Welcome to the Inkwell's Islands !"
+).openPopup();
+
+
+// Cercle
+
+const circle = L.circle([
+    imageHeight - 2555,
+    1620
+], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 100
+}).addTo(map);
+
+circle.bindPopup("I am a circle.");
+
+
+// Polygone existant
+
+const polygon = L.polygon([
+    [509, 1400],
+    [603, 1600],
+    [510, 1800]
+]).addTo(map);
+
+polygon.bindPopup("I am a polygon.");
+
+
+// ==================================================
+// CONFIGURATION DE L'ÉDITEUR
+// ==================================================
+
+const drawingLayer = L.layerGroup().addTo(map);
+
+let points = [];
+let currentPolygon = null;
+
+let isDrawing = false;
+
+// Polygones terminés
+let savedPolygons = [];
+
+let polygonNumber = 1;
+
+
+// ==================================================
+// DÉMARRER UN POLYGONE
+// ==================================================
+
+function startPolygon() {
+
+    points = [];
+    isDrawing = true;
+
+    if (currentPolygon) {
+        drawingLayer.removeLayer(currentPolygon);
+        currentPolygon = null;
+    }
+
+    updateCoordinates();
+
+    document.getElementById('status').textContent =
+        "Dessin en cours : polygone " + polygonNumber;
+
+}
+
+
+// ==================================================
+// AJOUTER UN POINT
+// ==================================================
+
+function addPoint(latlng) {
+
+    if (!isDrawing) return;
+
+    points.push([
+        latlng.lat,
+        latlng.lng
+    ]);
+
+    updatePolygon();
+
+}
+
+
+// ==================================================
+// ACTUALISER LE POLYGONE
+// ==================================================
+
+function updatePolygon() {
+
+    if (currentPolygon) {
+        drawingLayer.removeLayer(currentPolygon);
+        currentPolygon = null;
+    }
+
+    if (points.length >= 2) {
+
+        currentPolygon = L.polygon(points, {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.35,
+            weight: 3
+        }).addTo(drawingLayer);
+
+    }
+
+    updateCoordinates();
+
+}
+
+
+// ==================================================
+// TERMINER LE POLYGONE
+// ==================================================
+
+function finishPolygon() {
+
+    if (!isDrawing) return;
+
+    if (points.length < 3) {
+
+        alert("Il faut au moins 3 points !");
+        return;
+
+    }
+
+    isDrawing = false;
+
+    const name = "polygon" + polygonNumber;
+
+    savedPolygons.push({
+        name: name,
+        points: [...points]
+    });
+
+    polygonNumber++;
+
+    document.getElementById('status').textContent =
+        "Polygone terminé : " + name;
+
+    updateCoordinates();
+
+}
+
+
+// ==================================================
+// ANNULER LE DERNIER POINT
+// ==================================================
+
+function undoPoint() {
+
+    if (!isDrawing || points.length === 0) return;
+
+    points.pop();
+
+    updatePolygon();
+
+}
+
+
+// ==================================================
+// EFFACER LE POLYGONE EN COURS
+// ==================================================
+
+function clearPolygon() {
+
+    points = [];
+
+    isDrawing = false;
+
+    if (currentPolygon) {
+
+        drawingLayer.removeLayer(currentPolygon);
+        currentPolygon = null;
+
+    }
+
+    updateCoordinates();
+
+    document.getElementById('status').textContent =
+        "Dessin effacé";
+
+}
+
+
+// ==================================================
+// CONVERTIR LES COORDONNÉES EN PIXELS
+// ==================================================
+
+function pixelCoordinates(point) {
+
+    const x = Math.round(point[1]);
+
+    const y = Math.round(imageHeight - point[0]);
+
+    return [x, y];
+
+}
+
+
+// ==================================================
+// GÉNÉRER LE CODE D'UN POLYGONE
+// ==================================================
+
+function generatePolygonCode(name, polygonPoints) {
+
+    const coordinates = polygonPoints.map(point => {
+
+        const [x, y] = pixelCoordinates(point);
+
+        return `    [imageHeight-${y}, ${x}]`;
+
+    });
+
+    return `
+const ${name} = L.polygon([
+${coordinates.join(',\n')}
+]).addTo(map);
+
+${name}.bindPopup("${name}");
+`;
+
+}
+
+
+// ==================================================
+// GÉNÉRER TOUT LE CODE
+// ==================================================
+
+function generateCode() {
+
+    let code = "";
+
+    // Polygones terminés
+
+    savedPolygons.forEach(polygon => {
+
+        code += generatePolygonCode(
+            polygon.name,
+            polygon.points
+        );
+
+    });
+
+    // Polygone en cours
+
+    if (isDrawing && points.length >= 3) {
+
+        code += generatePolygonCode(
+            "polygon" + polygonNumber,
+            points
+        );
+
+    }
+
+    return code;
+
+}
+
+
+// ==================================================
+// AFFICHER LES COORDONNÉES
+// ==================================================
+
+function updateCoordinates() {
+
+    let output = "";
+
+    output += "Nombre de points : " + points.length + "\n\n";
+
+    output += "Coordonnées actuelles :\n";
+
+    points.forEach((point, index) => {
+
+        const [x, y] = pixelCoordinates(point);
+
+        output +=
+            `Point ${index + 1} : X=${x}, Y=${y}\n`;
+
+    });
+
+    output += "\n\n========== CODE JAVASCRIPT ==========\n";
+
+    output += generateCode();
+
+    document.getElementById('coordinates').value = output;
+
+}
+
+
+// ==================================================
+// COPIER LE CODE
+// ==================================================
+
+async function copyPolygonCode() {
+
+    const code = generateCode();
+
+    if (!code) {
+
+        alert("Aucun polygone à exporter !");
+        return;
+
+    }
+
+    try {
+
+        await navigator.clipboard.writeText(code);
+
+        alert("Code copié avec succès !");
+
+    } catch (error) {
+
+        const textarea = document.getElementById('coordinates');
+
+        textarea.value = code;
+        textarea.select();
+
+        document.execCommand('copy');
+
+        alert("Code copié !");
+
+    }
+
+}
+
+
+// ==================================================
+// ÉVÉNEMENTS DE LA CARTE
+// ==================================================
+
+// Clic gauche : ajouter un point
+
+map.on('click', function(e) {
+
+    addPoint(e.latlng);
+
+});
+
+
+// Clic droit : annuler le dernier point
+
+map.on('contextmenu', function(e) {
+
+    if (isDrawing) {
+
+        undoPoint();
+
+    }
+
+});
+
+
+// ==================================================
+// AFFICHER LES COORDONNÉES AU CLIC
+// ==================================================
+
+const popup = L.popup();
+
+map.on('click', function(e) {
+
+    const pixelX = Math.round(e.latlng.lng);
+
+    const pixelY = Math.round(imageHeight - e.latlng.lat);
+
+    popup
+        .setLatLng(e.latlng)
+        .setContent(
+            "Coordonnées de l'image :<br>" +
+            "X : " + pixelX + " px<br>" +
+            "Y : " + pixelY + " px"
+        )
+        .openOn(map);
+
+});
+
+</script>
+
+</body>
+</html>
