@@ -364,16 +364,14 @@ function generatePolygonCode(name, polygonPoints) {
 
         const [x, y] = pixelCoordinates(point);
 
-        return `    [imageHeight-${y}, ${x}]`;
+        return `    [${x}, ${y}]`;
 
     });
 
     return `
-const ${name} = L.polygon([
+const ${name} = [
 ${coordinates.join(',\n')}
-]).addTo(map);
-
-${name}.bindPopup("${name}");
+];
 `;
 
 }
@@ -507,28 +505,28 @@ map.on('contextmenu', function(e) {
 });
 
 
-// ==================================================
-// AFFICHER LES COORDONNÉES AU CLIC
-// ==================================================
+// // ==================================================
+// // AFFICHER LES COORDONNÉES AU CLIC
+// // ==================================================
 
-const popup = L.popup();
+// const popup = L.popup();
 
-map.on('click', function(e) {
+// map.on('click', function(e) {
 
-    const pixelX = Math.round(e.latlng.lng);
+//     const pixelX = Math.round(e.latlng.lng);
 
-    const pixelY = Math.round(imageHeight - e.latlng.lat);
+//     const pixelY = Math.round(imageHeight - e.latlng.lat);
 
-    popup
-        .setLatLng(e.latlng)
-        .setContent(
-            "Coordonnées de l'image :<br>" +
-            "X : " + pixelX + " px<br>" +
-            "Y : " + pixelY + " px"
-        )
-        .openOn(map);
+//     popup
+//         .setLatLng(e.latlng)
+//         .setContent(
+//             "Coordonnées de l'image :<br>" +
+//             "X : " + pixelX + " px<br>" +
+//             "Y : " + pixelY + " px"
+//         )
+//         .openOn(map);
 
-});
+// });
 
 </script>
 
