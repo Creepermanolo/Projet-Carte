@@ -75,14 +75,18 @@
       map.fitBounds(bounds);
       map.setMaxBounds(bounds); // empêche de sortir de la carte
 
-      var red = L.icon({
-	iconUrl: 'ico_red.png',
-
-	iconSize:     [64, 64], // size of the icon
-	iconAnchor:   [8, 55], // point of the icon which will correspond to marker's location
-
-	popupAnchor:  [0, -50] // point from which the popup should open relative to the iconAnchor
-});
+      var red = L.icon({iconUrl:'ico_red.png',iconSize:[64, 64], iconAnchor:[8, 55], popupAnchor:[0, -50]});
+      var ora = L.icon({iconUrl:'ico_ora.png',iconSize:[64, 64], iconAnchor:[8, 55], popupAnchor:[0, -50]});
+      var yel = L.icon({iconUrl:'ico_yel.png',iconSize:[64, 64], iconAnchor:[8, 55], popupAnchor:[0, -50]});
+      var lem = L.icon({iconUrl:'ico_lem.png',iconSize:[64, 64], iconAnchor:[8, 55], popupAnchor:[0, -50]});
+      var gre = L.icon({iconUrl:'ico_gre.png',iconSize:[64, 64], iconAnchor:[8, 55], popupAnchor:[0, -50]});
+      var tur = L.icon({iconUrl:'ico_tur.png',iconSize:[64, 64], iconAnchor:[8, 55], popupAnchor:[0, -50]});
+      var cya = L.icon({iconUrl:'ico_cya.png',iconSize:[64, 64], iconAnchor:[8, 55], popupAnchor:[0, -50]});
+      var azu = L.icon({iconUrl:'ico_azu.png',iconSize:[64, 64], iconAnchor:[8, 55], popupAnchor:[0, -50]});
+      var blu = L.icon({iconUrl:'ico_blu.png',iconSize:[64, 64], iconAnchor:[8, 55], popupAnchor:[0, -50]});
+      var pur = L.icon({iconUrl:'ico_pur.png',iconSize:[64, 64], iconAnchor:[8, 55], popupAnchor:[0, -50]});
+      var mag = L.icon({iconUrl:'ico_mag.png',iconSize:[64, 64], iconAnchor:[8, 55], popupAnchor:[0, -50]});
+      var pin = L.icon({iconUrl:'ico_pin.png',iconSize:[64, 64], iconAnchor:[8, 55], popupAnchor:[0, -50]});
 
       L.marker([580, 694], {icon: red}).addTo(map).bindPopup("I am a green leaf.");
 
