@@ -705,230 +705,272 @@
         // setTimeout(() => hell.remove(), 600);   // puis suppression
     </script>
     <script type="text/javascript">
-        const circle_b1 = L.circle([imageHeight-2500, 891], {
-            color: 'white',
-            fillColor: '#f03',
-            fillOpacity: 0,
-            radius: 80,
-            opacity: 20
-        }).addTo(map);
-        circle_b1.bindPopup("I am a circle.");
 
-        const circle_b2 = L.circle([imageHeight-2070, 1088], {
-            color: 'white',
-            fillColor: '#f03',
-            fillOpacity: 0,
-            radius: 90,
-            opacity: 20
-        }).addTo(map);
-        circle_b2.bindPopup("I am a circle.");
+        function place_mark(Y, X) {
+            return L.marker([imageHeight-Y, X]).addTo(map);
+        }
 
-        const circle_b3 = L.circle([imageHeight-2721, 1077], {
-            color: 'white',
-            fillColor: '#f03',
-            fillOpacity: 0,
-            radius: 80,
-            opacity: 20
-        }).addTo(map);
-        circle_b3.bindPopup("I am a circle.");
 
-        const circle_b4 = L.circle([imageHeight-1887, 1645], {
-            color: 'white',
-            fillColor: '#f03',
-            fillOpacity: 0,
-            radius: 90,
-            opacity: 20
-        }).addTo(map);
-        circle_b4.bindPopup("I am a circle.");
+        //Boss
 
-        const circle_b5 = L.circle([imageHeight-2179, 1813], {
-            color: 'white',
-            fillColor: '#f03',
-            fillOpacity: 0,
-            radius: 60,
-            opacity: 20
-        }).addTo(map);
-        circle_b5.bindPopup("I am a circle.");
+        const mark_b1 = place_mark(2500, 891);
+        mark_b1.bindPopup("I am a Boss.");
+        mark_b1.on('mouseover', function () { this.openPopup(); })
+        mark_b1.on('mouseout', function () { this.closePopup(); })
 
-        const circle_b6 = L.circle([imageHeight-2027, 2013], {
-            color: 'white',
-            fillColor: '#f03',
-            fillOpacity: 0,
-            radius: 90,
-            opacity: 20
-        }).addTo(map);
-        circle_b6.bindPopup("I am a circle.");
+        const mark_b2 = place_mark(2070, 1088);
+        mark_b2.bindPopup("I am a Boss.");
+        mark_b2.on('mouseover', function () { this.openPopup(); })
+        mark_b2.on('mouseout', function () { this.closePopup(); })
 
-        const circle_b7 = L.circle([imageHeight-2039, 2390], {
-            color: 'white',
-            fillColor: '#f03',
-            fillOpacity: 0,
-            radius: 90,
-            opacity: 20
-        }).addTo(map);
-        circle_b7.bindPopup("I am a circle.");
+        const mark_b3 = place_mark(2721, 1077);
+        mark_b3.bindPopup("I am a Boss.");
+        mark_b3.on('mouseover', function () { this.openPopup(); })
+        mark_b3.on('mouseout', function () { this.closePopup(); })
 
-        const circle_b8 = L.circle([imageHeight-2347, 2656], {
-            color: 'white',
-            fillColor: '#f03',
-            fillOpacity: 0,
-            radius: 60,
-            opacity: 20
-        }).addTo(map);
-        circle_b8.bindPopup("I am a circle.");
+        const mark_b4 = place_mark(1887, 1645);
+        mark_b4.bindPopup("I am a Boss.");
+        mark_b4.on('mouseover', function () { this.openPopup(); })
+        mark_b4.on('mouseout', function () { this.closePopup(); })
 
-        const circle_b9 = L.circle([imageHeight-1580, 1957], {
-            color: 'white',
-            fillColor: '#f03',
-            fillOpacity: 0,
-            radius: 60,
-            opacity: 20
-        }).addTo(map);
-        circle_b9.bindPopup("I am a circle.");
+        const mark_b5 = place_mark(2179, 1813);
+        mark_b5.bindPopup("I am a Boss.");
+        mark_b5.on('mouseover', function () { this.openPopup(); })
+        mark_b5.on('mouseout', function () { this.closePopup(); })
 
-        const circle_b10 = L.circle([imageHeight-1554, 2900], {
-            color: 'white',
-            fillColor: '#f03',
-            fillOpacity: 0,
-            radius: 100,
-            opacity: 20
-        }).addTo(map);
-        circle_b10.bindPopup("I am a circle.");
+        const mark_b6 = place_mark(2027, 2013);
+        mark_b6.bindPopup("I am a Boss.");
+        mark_b6.on('mouseover', function () { this.openPopup(); })
+        mark_b6.on('mouseout', function () { this.closePopup(); })
 
-        const circle_b11 = L.circle([imageHeight-1961, 3476], {
-            color: 'white',
-            fillColor: '#f03',
-            fillOpacity: 0,
-            radius: 120,
-            opacity: 20
-        }).addTo(map);
-        circle_b11.bindPopup("I am a circle.");
+        const mark_b7 = place_mark(2039, 2390);
+        mark_b7.bindPopup("I am a Boss.");
+        mark_b7.on('mouseover', function () { this.openPopup(); })
+        mark_b7.on('mouseout', function () { this.closePopup(); })
 
-        const circle_b12 = L.circle([imageHeight-2325, 4575], {
-            color: 'white',
-            fillColor: '#f03',
-            fillOpacity: 0,
-            radius: 140,
-            opacity: 20
-        }).addTo(map);
-        circle_b12.bindPopup("I am a circle.");
+        const mark_b8 = place_mark(2347, 2656);
+        mark_b8.bindPopup("I am a Boss.");
+        mark_b8.on('mouseover', function () { this.openPopup(); })
+        mark_b8.on('mouseout', function () { this.closePopup(); })
 
-        const circle_b13 = L.circle([imageHeight-1948, 3879], {
-            color: 'white',
-            fillColor: '#f03',
-            fillOpacity: 0,
-            radius: 120,
-            opacity: 20
-        }).addTo(map);
-        circle_b13.bindPopup("I am a circle.");
+        const mark_b9 = place_mark(1580, 1957);
+        mark_b9.bindPopup("I am a Boss.");
+        mark_b9.on('mouseover', function () { this.openPopup(); })
+        mark_b9.on('mouseout', function () { this.closePopup(); })
 
-        const circle_b14 = L.circle([imageHeight-1325, 3582], {
-            color: 'white',
-            fillColor: '#f03',
-            fillOpacity: 0,
-            radius: 60,
-            opacity: 20
-        }).addTo(map);
-        circle_b14.bindPopup("I am a circle.");
+        const mark_b10 = place_mark(1554, 2900);
+        mark_b10.bindPopup("I am a Boss.");
+        mark_b10.on('mouseover', function () { this.openPopup(); })
+        mark_b10.on('mouseout', function () { this.closePopup(); })
 
-        const circle_b15 = L.circle([imageHeight-1462, 4499], {
-            color: 'white',
-            fillColor: '#f03',
-            fillOpacity: 0,
-            radius: 120,
-            opacity: 20
-        }).addTo(map);
-        circle_b15.bindPopup("I am a circle.");
+        const mark_b11 = place_mark(1961, 3476);
+        mark_b11.bindPopup("I am a Boss.");
+        mark_b11.on('mouseover', function () { this.openPopup(); })
+        mark_b11.on('mouseout', function () { this.closePopup(); })
 
-        const circle_b16 = L.circle([imageHeight-1168, 4062], {
-            color: 'white',
-            fillColor: '#f03',
-            fillOpacity: 0,
-            radius: 60,
-            opacity: 20
-        }).addTo(map);
-        circle_b16.bindPopup("I am a circle.");
+        const mark_b12 = place_mark(2325, 4575);
+        mark_b12.bindPopup("I am a Boss.");
+        mark_b12.on('mouseover', function () { this.openPopup(); })
+        mark_b12.on('mouseout', function () { this.closePopup(); })
 
-        const circle_b17 = L.circle([imageHeight-901, 4424], {
-            color: 'white',
-            fillColor: '#f03',
-            fillOpacity: 0,
-            radius: 120,
-            opacity: 20
-        }).addTo(map);
-        circle_b17.bindPopup("I am a circle.");
+        const mark_b13 = place_mark(1948, 3879);
+        mark_b13.bindPopup("I am a Boss.");
+        mark_b13.on('mouseover', function () { this.openPopup(); })
+        mark_b13.on('mouseout', function () { this.closePopup(); })
 
-        const circle_b18 = L.circle([imageHeight-358, 5363], {
-            color: 'white',
-            fillColor: '#f03',
-            fillOpacity: 0,
-            radius: 30,
-            opacity: 20
-        }).addTo(map);
-        circle_b18.bindPopup("I am a circle.");
+        const mark_b14 = place_mark(1325, 3582);
+        mark_b14.bindPopup("I am a Boss.");
+        mark_b14.on('mouseover', function () { this.openPopup(); })
+        mark_b14.on('mouseout', function () { this.closePopup(); })
 
-        const circle_b19 = L.circle([imageHeight-450, 5514], {
-            color: 'white',
-            fillColor: '#f03',
-            fillOpacity: 0,
-            radius: 30,
-            opacity: 20
-        }).addTo(map);
-        circle_b19.bindPopup("I am a circle.");
+        const mark_b15 = place_mark(1462, 4499);
+        mark_b15.bindPopup("I am a Boss.");
+        mark_b15.on('mouseover', function () { this.openPopup(); })
+        mark_b15.on('mouseout', function () { this.closePopup(); })
 
-        const circle_b20 = L.circle([imageHeight-843, 708], {
-            color: 'white',
-            fillColor: '#f03',
-            fillOpacity: 0,
-            radius: 50,
-            opacity: 20
-        }).addTo(map);
-        circle_b20.bindPopup("I am a circle.");
+        const mark_b16 = place_mark(1168, 4062);
+        mark_b16.bindPopup("I am a Boss.");
+        mark_b16.on('mouseover', function () { this.openPopup(); })
+        mark_b16.on('mouseout', function () { this.closePopup(); })
 
-        const circle_b21 = L.circle([imageHeight-378, 1393], {
-            color: 'white',
-            fillColor: '#f03',
-            fillOpacity: 0,
-            radius: 120,
-            opacity: 20
-        }).addTo(map);
-        circle_b21.bindPopup("I am a circle.");
+        const mark_b17 = place_mark(901, 4424);
+        mark_b17.bindPopup("I am a Boss.");
+        mark_b17.on('mouseover', function () { this.openPopup(); })
+        mark_b17.on('mouseout', function () { this.closePopup(); })
 
-        const circle_b22 = L.circle([imageHeight-476, 1766], {
-            color: 'white',
-            fillColor: '#f03',
-            fillOpacity: 0,
-            radius: 120,
-            opacity: 20
-        }).addTo(map);
-        circle_b22.bindPopup("I am a circle.");
+        const mark_b18 = place_mark(358, 5363);
+        mark_b18.bindPopup("I am a Boss.");
+        mark_b18.on('mouseover', function () { this.openPopup(); })
+        mark_b18.on('mouseout', function () { this.closePopup(); })
 
-        const circle_b23 = L.circle([imageHeight-1085, 833], {
-            color: 'white',
-            fillColor: '#f03',
-            fillOpacity: 0,
-            radius: 60,
-            opacity: 20
-        }).addTo(map);
-        circle_b23.bindPopup("I am a circle.");
+        const mark_b19 = place_mark(450, 5514);
+        mark_b19.bindPopup("I am a Boss.");
+        mark_b19.on('mouseover', function () { this.openPopup(); })
+        mark_b19.on('mouseout', function () { this.closePopup(); })
 
-        const circle_b24 = L.circle([imageHeight-896, 1451], {
-            color: 'white',
-            fillColor: '#f03',
-            fillOpacity: 0,
-            radius: 60,
-            opacity: 20
-        }).addTo(map);
-        circle_b24.bindPopup("I am a circle.");
+        const mark_b20 = place_mark(843, 708);
+        mark_b20.bindPopup("I am a Boss.");
+        mark_b20.on('mouseover', function () { this.openPopup(); })
+        mark_b20.on('mouseout', function () { this.closePopup(); })
 
-        const circle_b25 = L.circle([imageHeight-431, 653], {
-            color: 'white',
-            fillColor: '#f03',
-            fillOpacity: 0,
-            radius: 100,
-            opacity: 20
-        }).addTo(map);
-        circle_b25.bindPopup("I am a circle.");
+        const mark_b21 = place_mark(378, 1393);
+        mark_b21.bindPopup("I am a Boss.");
+        mark_b21.on('mouseover', function () { this.openPopup(); })
+        mark_b21.on('mouseout', function () { this.closePopup(); })
+
+        const mark_b22 = place_mark(476, 1766);
+        mark_b22.bindPopup("I am a Boss.");
+        mark_b22.on('mouseover', function () { this.openPopup(); })
+        mark_b22.on('mouseout', function () { this.closePopup(); })
+
+        const mark_b23 = place_mark(1085, 833);
+        mark_b23.bindPopup("I am a Boss.");
+        mark_b23.on('mouseover', function () { this.openPopup(); })
+        mark_b23.on('mouseout', function () { this.closePopup(); })
+
+        const mark_b24 = place_mark(896, 1451);
+        mark_b24.bindPopup("I am a Boss.");
+        mark_b24.on('mouseover', function () { this.openPopup(); })
+        mark_b24.on('mouseout', function () { this.closePopup(); })
+
+        const mark_b25 = place_mark(431, 653);
+        mark_b25.bindPopup("I am a Boss.");
+        mark_b25.on('mouseover', function () { this.openPopup(); })
+        mark_b25.on('mouseout', function () { this.closePopup(); })
+
+
+        // NPC
+
+        const mark_P26 = place_mark(2112, 372);
+        mark_P26.bindPopup("I am a NPC.");
+        mark_P26.on('mouseover', function () { this.openPopup(); })
+        mark_P26.on('mouseout', function () { this.closePopup(); })
+
+        const mark_P27 = place_mark(2227, 849);
+        mark_P27.bindPopup("I am a NPC.");
+        mark_P27.on('mouseover', function () { this.openPopup(); })
+        mark_P27.on('mouseout', function () { this.closePopup(); })
+
+        const mark_P28 = place_mark(2501, 1149);
+        mark_P28.bindPopup("I am a NPC.");
+        mark_P28.on('mouseover', function () { this.openPopup(); })
+        mark_P28.on('mouseout', function () { this.closePopup(); })
+
+        const mark_P29 = place_mark(1863, 1300);
+        mark_P29.bindPopup("I am a NPC.");
+        mark_P29.on('mouseover', function () { this.openPopup(); })
+        mark_P29.on('mouseout', function () { this.closePopup(); })
+
+        const mark_P30 = place_mark(2664, 1428);
+        mark_P30.bindPopup("I am a NPC.");
+        mark_P30.on('mouseover', function () { this.openPopup(); })
+        mark_P30.on('mouseout', function () { this.closePopup(); })
+
+        const mark_P31 = place_mark(2243, 1616);
+        mark_P31.bindPopup("I am a NPC.");
+        mark_P31.on('mouseover', function () { this.openPopup(); })
+        mark_P31.on('mouseout', function () { this.closePopup(); })
+
+        const mark_P32 = place_mark(1963, 2178);
+        mark_P32.bindPopup("I am a NPC.");
+        mark_P32.on('mouseover', function () { this.openPopup(); })
+        mark_P32.on('mouseout', function () { this.closePopup(); })
+
+        const mark_P33 = place_mark(2128, 2488);
+        mark_P33.bindPopup("I am a NPC.");
+        mark_P33.on('mouseover', function () { this.openPopup(); })
+        mark_P33.on('mouseout', function () { this.closePopup(); })
+
+        const mark_P34 = place_mark(2292, 3041);
+        mark_P34.bindPopup("I am a NPC.");
+        mark_P34.on('mouseover', function () { this.openPopup(); })
+        mark_P34.on('mouseout', function () { this.closePopup(); })
+
+        const mark_P35 = place_mark(1780, 2098);
+        mark_P35.bindPopup("I am a NPC.");
+        mark_P35.on('mouseover', function () { this.openPopup(); })
+        mark_P35.on('mouseout', function () { this.closePopup(); })
+
+        const mark_P36 = place_mark(1526, 2544);
+        mark_P36.bindPopup("I am a NPC.");
+        mark_P36.on('mouseover', function () { this.openPopup(); })
+        mark_P36.on('mouseout', function () { this.closePopup(); })
+
+        const mark_P37 = place_mark(1736, 2965);
+        mark_P37.bindPopup("I am a NPC.");
+        mark_P37.on('mouseover', function () { this.openPopup(); })
+        mark_P37.on('mouseout', function () { this.closePopup(); })
+
+        const mark_P38 = place_mark(1618, 3558);
+        mark_P38.bindPopup("I am a NPC.");
+        mark_P38.on('mouseover', function () { this.openPopup(); })
+        mark_P38.on('mouseout', function () { this.closePopup(); })
+
+        const mark_P39 = place_mark(1198, 3824);
+        mark_P39.bindPopup("I am a NPC.");
+        mark_P39.on('mouseover', function () { this.openPopup(); })
+        mark_P39.on('mouseout', function () { this.closePopup(); })
+
+        const mark_P40 = place_mark(2306, 3956);
+        mark_P40.bindPopup("I am a NPC.");
+        mark_P40.on('mouseover', function () { this.openPopup(); })
+        mark_P40.on('mouseout', function () { this.closePopup(); })
+
+        const mark_P41 = place_mark(1744, 4724);
+        mark_P41.bindPopup("I am a NPC.");
+        mark_P41.on('mouseover', function () { this.openPopup(); })
+        mark_P41.on('mouseout', function () { this.closePopup(); })
+
+        const mark_P42 = place_mark(1712, 3832);
+        mark_P42.bindPopup("I am a NPC.");
+
+        const mark_P43 = place_mark(357, 221);
+        mark_P43.bindPopup("I am a NPC.");
+        mark_P43.on('mouseover', function () { this.openPopup(); })
+        mark_P43.on('mouseout', function () { this.closePopup(); })
+
+        const mark_P44 = place_mark(548, 945);
+        mark_P44.bindPopup("I am a NPC.");
+        mark_P44.on('mouseover', function () { this.openPopup(); })
+        mark_P44.on('mouseout', function () { this.closePopup(); })
+
+        const mark_P45 = place_mark(737, 1494);
+        mark_P45.bindPopup("I am a NPC.");
+        mark_P45.on('mouseover', function () { this.openPopup(); })
+        mark_P45.on('mouseout', function () { this.closePopup(); })
+
+        const mark_P46 = place_mark(1059, 1059);
+        mark_P46.bindPopup("I am a NPC.");
+        mark_P46.on('mouseover', function () { this.openPopup(); })
+        mark_P46.on('mouseout', function () { this.closePopup(); })
+
+        const mark_P47 = place_mark(331, 1150);
+        mark_P47.bindPopup("I am a NPC.");
+        mark_P47.on('mouseover', function () { this.openPopup(); })
+        mark_P47.on('mouseout', function () { this.closePopup(); })
+
+
+        // SHOPS
+
+        const mark_S48 = place_mark(2314, 1113);
+        mark_S48.bindPopup("I am a Shop.");
+        mark_S48.on('mouseover', function () { this.openPopup(); })
+        mark_S48.on('mouseout', function () { this.closePopup(); })
+
+        const mark_S49 = place_mark(1701, 2348);
+        mark_S49.bindPopup("I am a Shop.");
+        mark_S49.on('mouseover', function () { this.openPopup(); })
+        mark_S49.on('mouseout', function () { this.closePopup(); })
+
+        const mark_S50 = place_mark(1622, 4053);
+        mark_S50.bindPopup("I am a Shop.");
+        mark_S50.on('mouseover', function () { this.openPopup(); })
+        mark_S50.on('mouseout', function () { this.closePopup(); })
+
+        const mark_S51 = place_mark(419, 1019);
+        mark_S51.bindPopup("I am a Shop.");
+        mark_S51.on('mouseover', function () { this.openPopup(); })
+        mark_S51.on('mouseout', function () { this.closePopup(); })
     </script>
 </body>
 </html>
