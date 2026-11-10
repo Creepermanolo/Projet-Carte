@@ -13,7 +13,7 @@
 
 @font-face {
     font-family: 'king';
-    src: url('TypoSlab\ Irregular\ Demo.otf') format('truetype');
+    src: url('Copse_Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -21,6 +21,7 @@
 body{
     margin: 0px;
     font-family: "king";
+    font-weight: bold;
     color: #fff;
     box-sizing: border-box;
 }
@@ -28,13 +29,13 @@ body{
     background-image: url(side.png);
     width: 25vw;
     height: 100vh;
-    padding: 1vh;
+    padding: 1vw;
     position: fixed;
     top: 0;
     left: 0;
 }
 #page {
-  filter: url("#rgb-split")  blur(0.5px);
+  filter: url("#rgb-split")  blur(1px);
   width: 100vw;
   height: 100vh;
 }
@@ -55,6 +56,7 @@ body{
 }
 
 .leaflet-bar a{
+    font-size: 3em;
     transition: all 125ms;
 
 
@@ -64,19 +66,17 @@ body{
     width: 45px;
     height: 45px;
     line-height: 45px;
+    font-size: 2em;
 }
 .leaflet-bar a:hover{
     background-color: #222;
     color: #fff;
-    font-size: 3em;
+    font-size: 3rem;
 }
 
-.leaflet-marker-icon {
-  border-radius: 50%;
-  border: 2px solid #4d5bf9;
-  background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease;
+.leaflet-popup-content{
+    font-family: "king";
+    font-size: 22px;
 }
 
 .leaflet-marker-icon:hover {
@@ -92,6 +92,20 @@ h1{
 }
 .logo{
     height: auto;
+}
+.foot{
+ 
+    position : absolute;
+    text-align: right;
+    width: 100%;
+    bottom: 0px;
+    z-index:1000;
+    text-shadow: 0px 0px 10px #000000;
+}
+.leaflet-bar a.leaflet-disabled {
+    cursor: default;
+    background-color: #ffffff;
+    color: #ddd;
 }
 .search-line {
     display: flex;
@@ -122,7 +136,7 @@ form{
     margin: 0;
     padding: 0 12px 0 42px;
     border: 0px;
-    border-radius: 4px;
+    border-radius: 1vw;
     border-right: none;
     border-radius: 0.5vw 0px 0 0.5vw;
     background-color: white;
@@ -204,7 +218,7 @@ form{
     color: black;
     border-radius: 0.5vw;
     padding: 1vw;
-    margin-top: 0.5vw;
+    margin-top: 1vw;
 }
 
 .info h2{
