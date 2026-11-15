@@ -1,62 +1,32 @@
-
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Cuphead Map Editor</title>
 
-    <link rel="stylesheet"
-        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            font-family: Arial, sans-serif;
-        }
+        
+        html, body {margin: 0; padding: 0; width: 100%; height: 100%; font-family: Arial, sans-serif;}
 
-        #map {
-            width: 100%;
-            height: 75vh;
-            min-height: 400px;
-            background: #69a0ca;
-        }
+        #map {width: 100%; height: 75vh; min-height: 400px; background: #69a0ca;}
 
-        #controls {
-            padding: 15px;
-            background: #eeeeee;
-        }
+        #controls {padding: 15px; background: #eeeeee;}
 
-        button {
-            padding: 9px 13px;
-            margin: 3px;
-            cursor: pointer;
-            border: 1px solid #999;
-            border-radius: 5px;
-        }
+        button {padding: 9px 13px; margin: 3px; cursor: pointer; border: 1px solid #999; border-radius: 5px;}
 
-        button:hover {
-            background: #ddd;
-        }
+        button:hover {background: #ddd;}
 
-        #coordinates {
-            width: 100%;
-            height: 180px;
-            margin-top: 10px;
-            box-sizing: border-box;
-            font-family: monospace;
-        }
+        #coordinates {width: 100%; height: 180px; margin-top: 10px; box-sizing: border-box; font-family: monospace;}
 
-        #status {
-            margin: 10px 3px;
-            font-weight: bold;
-        }
+        #status {margin: 10px 3px; font-weight: bold;}
+
     </style>
 </head>
 
@@ -92,443 +62,335 @@
             En attente
         </div>
 
-        <textarea id="coordinates" readonly
-            placeholder="Les coordonnées apparaîtront ici...">
+        <textarea id="coordinates" readonly placeholder="Les coordonnées apparaîtront ici...">
         </textarea>
 
     </div>
 
 
-<script>
+    <script>
 
-// ==================================================
-// INITIALISATION DE LA CARTE
-// ==================================================
+        //#region INITIALISATION DE LA CARTE
 
-// Dimensions réelles de l'image
+        // Dimensions réelles de l'image
+        const imageWidth = 5830;
+        const imageHeight = 2868;
 
-const imageWidth = 5830;
-const imageHeight = 2868;
+        // Initialisation en coordonnées pixels
+        const map = L.map('map', {
+            crs: L.CRS.Simple,
+            minZoom: -2,
+            maxZoom: 2,
+            zoomSnap: 0.1
+        });
+        
+        const bounds = [[0, 0], [imageHeight, imageWidth]]; // Limites de l'image
 
-// Initialisation en coordonnées pixels
+        L.imageOverlay('Cuphead_map.png', bounds).addTo(map); // Affichage de l'image
 
-const map = L.map('map', {
-    crs: L.CRS.Simple,
-    minZoom: -2,
-    maxZoom: 2,
-    zoomSnap: 0.1
-});
+        // Ajustement automatique
+        map.fitBounds(bounds);
+        map.setMaxBounds(bounds);
 
-// Limites de l'image
+        //#endregion
 
-const bounds = [
-    [0, 0],
-    [imageHeight, imageWidth]
-];
+        //#region CONFIGURATION DE L'ÉDITEUR
 
-// Affichage de l'image
+        const drawingLayer = L.layerGroup().addTo(map);
 
-L.imageOverlay(
-    'Cuphead_map.png',
-    bounds
-).addTo(map);
+        let points = [];
+        let currentPolygon = null;
 
-// Ajustement automatique
+        let isDrawing = false;
+        
+        let savedPolygons = []; // Polygones terminés
 
-map.fitBounds(bounds);
-map.setMaxBounds(bounds);
+        let polygonNumber = 1;
 
+        //#endregion
 
-// ==================================================
-// ÉLÉMENTS EXISTANTS
-// ==================================================
+        //#region DÉMARRER UN POLYGONE
 
-// Marqueur
+        function startPolygon() {
 
-const marker = L.marker([
-    imageHeight - 2288,
-    694
-]).addTo(map);
+            points = [];
+            isDrawing = true;
 
-marker.bindPopup(
-    "<b>Hello !</b><br>Welcome to the Inkwell's Islands !"
-).openPopup();
+            if (currentPolygon) {
+                drawingLayer.removeLayer(currentPolygon);
+                currentPolygon = null;
+            }
 
+            updateCoordinates();
 
-// Cercle
+            document.getElementById('status').textContent = "Dessin en cours : polygone " + polygonNumber;
 
-const circle = L.circle([
-    imageHeight - 2555,
-    1620
-], {
-    color: 'red',
-    fillColor: '#f03',
-    fillOpacity: 0.5,
-    radius: 100
-}).addTo(map);
+        }
 
-circle.bindPopup("I am a circle.");
+        //#endregion
 
+        //#region AJOUTER UN POINT
 
-// Polygone existant
+        function addPoint(latlng) {
 
-const polygon = L.polygon([
-    [509, 1400],
-    [603, 1600],
-    [510, 1800]
-]).addTo(map);
+            if (!isDrawing) return;
 
-polygon.bindPopup("I am a polygon.");
+            points.push([latlng.lat, latlng.lng]);
 
+            updatePolygon();
 
-// ==================================================
-// CONFIGURATION DE L'ÉDITEUR
-// ==================================================
+        }
 
-const drawingLayer = L.layerGroup().addTo(map);
+        //#endregion
 
-let points = [];
-let currentPolygon = null;
+        //#region ACTUALISER LE POLYGONE
 
-let isDrawing = false;
+        function updatePolygon() {
 
-// Polygones terminés
-let savedPolygons = [];
+            if (currentPolygon) {
+                drawingLayer.removeLayer(currentPolygon);
+                currentPolygon = null;
+            }
 
-let polygonNumber = 1;
+            if (points.length >= 2) {
 
+                currentPolygon = L.polygon(points, {
+                    color: 'red',
+                    fillColor: '#f03',
+                    fillOpacity: 0.35,
+                    weight: 3
+                }).addTo(drawingLayer);
 
-// ==================================================
-// DÉMARRER UN POLYGONE
-// ==================================================
+            }
 
-function startPolygon() {
+            updateCoordinates();
 
-    points = [];
-    isDrawing = true;
+        }
 
-    if (currentPolygon) {
-        drawingLayer.removeLayer(currentPolygon);
-        currentPolygon = null;
-    }
+        //#endregion
 
-    updateCoordinates();
+        //#region TERMINER LE POLYGONE
 
-    document.getElementById('status').textContent =
-        "Dessin en cours : polygone " + polygonNumber;
+        function finishPolygon() {
 
-}
+            if (!isDrawing) return;
 
+            if (points.length < 3) {
 
-// ==================================================
-// AJOUTER UN POINT
-// ==================================================
+                alert("Il faut au moins 3 points !");
+                return;
 
-function addPoint(latlng) {
+            }
 
-    if (!isDrawing) return;
+            isDrawing = false;
 
-    points.push([
-        latlng.lat,
-        latlng.lng
-    ]);
+            const name = "polygon" + polygonNumber;
 
-    updatePolygon();
+            savedPolygons.push({
+                name: name,
+                points: [...points]
+            });
 
-}
+            polygonNumber++;
 
+            document.getElementById('status').textContent = "Polygone terminé : " + name;
 
-// ==================================================
-// ACTUALISER LE POLYGONE
-// ==================================================
+            updateCoordinates();
 
-function updatePolygon() {
+        }
 
-    if (currentPolygon) {
-        drawingLayer.removeLayer(currentPolygon);
-        currentPolygon = null;
-    }
+        //#endregion
 
-    if (points.length >= 2) {
+        //#region ANNULER LE DERNIER POINT
 
-        currentPolygon = L.polygon(points, {
-            color: 'red',
-            fillColor: '#f03',
-            fillOpacity: 0.35,
-            weight: 3
-        }).addTo(drawingLayer);
+        function undoPoint() {
 
-    }
+            if (!isDrawing || points.length === 0) return;
 
-    updateCoordinates();
+            points.pop();
 
-}
+            updatePolygon();
 
+        }
 
-// ==================================================
-// TERMINER LE POLYGONE
-// ==================================================
+        //#endregion
 
-function finishPolygon() {
+        //#region EFFACER LE POLYGONE EN COURS
 
-    if (!isDrawing) return;
+        function clearPolygon() {
 
-    if (points.length < 3) {
+            points = [];
 
-        alert("Il faut au moins 3 points !");
-        return;
+            isDrawing = false;
 
-    }
+            if (currentPolygon) {
 
-    isDrawing = false;
+                drawingLayer.removeLayer(currentPolygon);
+                currentPolygon = null;
 
-    const name = "polygon" + polygonNumber;
+            }
 
-    savedPolygons.push({
-        name: name,
-        points: [...points]
-    });
+            updateCoordinates();
 
-    polygonNumber++;
+            document.getElementById('status').textContent = "Dessin effacé";
 
-    document.getElementById('status').textContent =
-        "Polygone terminé : " + name;
+        }
 
-    updateCoordinates();
+        //#endregion
 
-}
+        //#region CONVERTIR LES COORDONNÉES EN PIXELS
 
+        function pixelCoordinates(point) {
 
-// ==================================================
-// ANNULER LE DERNIER POINT
-// ==================================================
+            const x = Math.round(point[1]);
 
-function undoPoint() {
+            const y = Math.round(imageHeight - point[0]);
 
-    if (!isDrawing || points.length === 0) return;
+            return [x, y];
 
-    points.pop();
+        }
 
-    updatePolygon();
+        //#endregion
 
-}
+        //#region GÉNÉRER LE CODE D'UN POLYGONE
 
+        function generatePolygonCode(name, polygonPoints) {
 
-// ==================================================
-// EFFACER LE POLYGONE EN COURS
-// ==================================================
+            const coordinates = polygonPoints.map(point => {
 
-function clearPolygon() {
+                const [x, y] = pixelCoordinates(point);
 
-    points = [];
+                return `    [${x}, ${y}]`;
 
-    isDrawing = false;
+            });
 
-    if (currentPolygon) {
+            return `const ${name} = [\n${coordinates.join(',\n')}\n];\n`;
 
-        drawingLayer.removeLayer(currentPolygon);
-        currentPolygon = null;
+        }
 
-    }
+        //#endregion
 
-    updateCoordinates();
+        //#region GÉNÉRER TOUT LE CODE
 
-    document.getElementById('status').textContent =
-        "Dessin effacé";
+        function generateCode() {
 
-}
+            let code = "";
 
+            // Polygones terminés
 
-// ==================================================
-// CONVERTIR LES COORDONNÉES EN PIXELS
-// ==================================================
+            savedPolygons.forEach(polygon => {
 
-function pixelCoordinates(point) {
+                code += generatePolygonCode(
+                    polygon.name,
+                    polygon.points
+                );
 
-    const x = Math.round(point[1]);
+            });
 
-    const y = Math.round(imageHeight - point[0]);
+            // Polygone en cours
 
-    return [x, y];
+            if (isDrawing && points.length >= 3) {
 
-}
+                code += generatePolygonCode(
+                    "polygon" + polygonNumber,
+                    points
+                );
 
+            }
 
-// ==================================================
-// GÉNÉRER LE CODE D'UN POLYGONE
-// ==================================================
+            return code;
 
-function generatePolygonCode(name, polygonPoints) {
+        }
 
-    const coordinates = polygonPoints.map(point => {
+        //#endregion
 
-        const [x, y] = pixelCoordinates(point);
+        //#region AFFICHER LES COORDONNÉES
 
-        return `    [${x}, ${y}]`;
+        function updateCoordinates() {
 
-    });
+            let output = "";
 
-    return `
-const ${name} = [
-${coordinates.join(',\n')}
-];
-`;
+            output += "Nombre de points : " + points.length + "\n\n";
 
-}
+            output += "Coordonnées actuelles :\n";
 
+            points.forEach((point, index) => {
 
-// ==================================================
-// GÉNÉRER TOUT LE CODE
-// ==================================================
+                const [x, y] = pixelCoordinates(point);
 
-function generateCode() {
+                output += `Point ${index + 1} : X=${x}, Y=${y}\n`;
 
-    let code = "";
+            });
 
-    // Polygones terminés
+            output += "\n\n========== CODE JAVASCRIPT ==========\n";
 
-    savedPolygons.forEach(polygon => {
+            output += generateCode();
 
-        code += generatePolygonCode(
-            polygon.name,
-            polygon.points
-        );
+            document.getElementById('coordinates').value = output;
 
-    });
+        }
 
-    // Polygone en cours
+        //#endregion
 
-    if (isDrawing && points.length >= 3) {
+        //#region COPIER LE CODE
 
-        code += generatePolygonCode(
-            "polygon" + polygonNumber,
-            points
-        );
+        async function copyPolygonCode() {
 
-    }
+            const code = generateCode();
 
-    return code;
+            if (!code) {
 
-}
+                alert("Aucun polygone à exporter !");
+                return;
 
+            }
 
-// ==================================================
-// AFFICHER LES COORDONNÉES
-// ==================================================
+            try {
 
-function updateCoordinates() {
+                await navigator.clipboard.writeText(code);
 
-    let output = "";
+                alert("Code copié avec succès !");
 
-    output += "Nombre de points : " + points.length + "\n\n";
+            } catch (error) {
 
-    output += "Coordonnées actuelles :\n";
+                const textarea = document.getElementById('coordinates');
 
-    points.forEach((point, index) => {
+                textarea.value = code;
+                textarea.select();
 
-        const [x, y] = pixelCoordinates(point);
+                document.execCommand('copy');
 
-        output +=
-            `Point ${index + 1} : X=${x}, Y=${y}\n`;
+                alert("Code copié !");
 
-    });
+            }
 
-    output += "\n\n========== CODE JAVASCRIPT ==========\n";
+        }
 
-    output += generateCode();
+        //#endregion
 
-    document.getElementById('coordinates').value = output;
+        //#region ÉVÉNEMENTS DE LA CARTE
 
-}
+        // Clic gauche : ajouter un point
 
+        map.on('click', function (e) {
 
-// ==================================================
-// COPIER LE CODE
-// ==================================================
+            addPoint(e.latlng);
 
-async function copyPolygonCode() {
+        });
 
-    const code = generateCode();
 
-    if (!code) {
+        // Clic droit : annuler le dernier point
 
-        alert("Aucun polygone à exporter !");
-        return;
+        map.on('contextmenu', function (e) {
 
-    }
+            if (isDrawing) undoPoint();
 
-    try {
+        });
 
-        await navigator.clipboard.writeText(code);
+        //#endregion
 
-        alert("Code copié avec succès !");
-
-    } catch (error) {
-
-        const textarea = document.getElementById('coordinates');
-
-        textarea.value = code;
-        textarea.select();
-
-        document.execCommand('copy');
-
-        alert("Code copié !");
-
-    }
-
-}
-
-
-// ==================================================
-// ÉVÉNEMENTS DE LA CARTE
-// ==================================================
-
-// Clic gauche : ajouter un point
-
-map.on('click', function(e) {
-
-    addPoint(e.latlng);
-
-});
-
-
-// Clic droit : annuler le dernier point
-
-map.on('contextmenu', function(e) {
-
-    if (isDrawing) {
-
-        undoPoint();
-
-    }
-
-});
-
-
-// // ==================================================
-// // AFFICHER LES COORDONNÉES AU CLIC
-// // ==================================================
-
-// const popup = L.popup();
-
-// map.on('click', function(e) {
-
-//     const pixelX = Math.round(e.latlng.lng);
-
-//     const pixelY = Math.round(imageHeight - e.latlng.lat);
-
-//     popup
-//         .setLatLng(e.latlng)
-//         .setContent(
-//             "Coordonnées de l'image :<br>" +
-//             "X : " + pixelX + " px<br>" +
-//             "Y : " + pixelY + " px"
-//         )
-//         .openOn(map);
-
-// });
-
-</script>
+    </script>
 
 </body>
+
 </html>
