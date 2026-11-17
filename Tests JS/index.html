@@ -16,7 +16,9 @@
 
 <body>
     <div id="map" style="height: 1080px"></div>
-    <div id="coordinates" style="position: fixed; padding: 6px 12px; font-size: 16px; z-index: 1000; pointer-events: none;">
+    <div id="coordinates" style="position: fixed; top: 10px; left: 10px; padding: 8px 14px; font-size: 16px; font-family: Arial, sans-serif;
+    color: #ffffff; background-color: rgba(0, 0, 0, 0.75); border-radius: 6px; z-index: 1000; pointer-events: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);">
         Lat/Y : -- | Lng/X : --
     </div>
     <script type="text/javascript">
@@ -3127,52 +3129,6 @@
         hellMask.addEventListener("mouseout", (e) => {
             tooltip.removeFrom(map);
         });
-
-        //#endregion
-
-        //#region Fonction pour les marqueurs
-
-        // let pinnedMarker = null;
-
-        // function configureMarker(marker) {
-            
-        //     marker.on('mouseover', function () {
-        //         if (pinnedMarker !== this) {
-        //             this.openPopup();
-        //         }
-        //     });
-
-        //     marker.on('mouseout', function () {
-        //         if (pinnedMarker !== this) {
-        //             this.closePopup();
-        //         }
-        //     });
-
-        //     marker.on('click', function () {
-                
-        //         if (pinnedMarker === this) {
-        //             pinnedMarker = null;
-        //             this.closePopup();
-        //         }
-                
-        //         else {
-        //             if (pinnedMarker !== null) {
-        //                 pinnedMarker.closePopup();
-        //             }
-        //             pinnedMarker = this;
-        //             this.openPopup();
-        //         }
-
-        //     });
-
-        //     marker.on('popupclose', function () {
-        //         if (pinnedMarker === this) {
-        //             pinnedMarker = null;
-        //         }
-        //     });
-        //     return marker;
-
-        // }
 
         //#endregion
     </script>
