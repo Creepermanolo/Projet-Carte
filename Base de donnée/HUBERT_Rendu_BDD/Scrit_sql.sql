@@ -4,7 +4,7 @@ use My_map;
 
 CREATE TABLE Users(
    user_id INT Auto_Increment,
-   user_mail VARCHAR(255) NOT NULL,
+   user_mail VARCHAR(191) NOT NULL,
    password VARCHAR(255) NOT NULL,
    name VARCHAR(50) NOT NULL,
    Max_zone INT,
@@ -192,7 +192,66 @@ INSERT INTO Points_of_Interest
     description, position_X, position_Y,
     created_at, update_at, created_by)
 VALUES
-   (1, 1, 1, 1, 'The Root Pack','Boss de Inkwell Isle I.', 100, 200, '2026-10-06 10:00:00', NULL, 1);
+   (1, 1, 1, 1, 'Boss 1','Boss de Inkwell Isle I.', 891, 2500, NULL, NULL, NULL),
+   (2, 1, 1, 1, 'Boss 2','Boss de Inkwell Isle I.', 1088, 2070, NULL, NULL, NULL),
+   (3, 1, 1, 1, 'Boss 3','Boss de Inkwell Isle I.', 1077, 2721, NULL, NULL, NULL),
+   (4, 1, 1, 1, 'Boss 4','Boss de Inkwell Isle I.', 1645, 1887, NULL, NULL, NULL),
+   (5, 1, 1, 1, 'Boss 5','Boss de Inkwell Isle I.', 1813, 2179, NULL, NULL, NULL),
+   (6, 1, 1, 1, 'Boss 6','Boss de Inkwell Isle II.', 2013, 2027, NULL, NULL, NULL),
+   (7, 1, 1, 1, 'Boss 7', 'Boss de Inkwell Isle II.', 2390, 2039, NULL, NULL, NULL),
+   (8, 1, 1, 1, 'Boss 8', 'Boss de Inkwell Isle II.', 2656, 2347, NULL, NULL, NULL),
+   (9, 1, 1, 1, 'Boss 9', 'Boss de Inkwell Isle II.', 1957, 1580, NULL, NULL, NULL),
+   (10, 1, 1, 1, 'Boss 10', 'Boss de Inkwell Isle II.', 2900, 1554, NULL, NULL, NULL),
+   (11, 1, 1, 1, 'Boss 11', 'Boss de Inkwell Isle III.', 3476, 1961, NULL, NULL, NULL),
+   (12, 1, 1, 1, 'Boss 12', 'Boss de Inkwell Isle III.', 4575, 2325, NULL, NULL, NULL),
+   (13, 1, 1, 1, 'Boss 13', 'Boss de Inkwell Isle III.', 3879, 1948, NULL, NULL, NULL),
+   (14, 1, 1, 1, 'Boss 14', 'Boss de Inkwell Isle III.', 3582, 1325, NULL, NULL, NULL),
+   (15, 1, 1, 1, 'Boss 15', 'Boss de Inkwell Isle III.', 4499, 1462, NULL, NULL, NULL),
+   (16, 1, 1, 1, 'Boss 16', 'Boss de Inkwell Isle III.', 4062, 1168, NULL, NULL, NULL),
+   (17, 1, 1, 1, 'Boss 17', 'Boss de Inkwell Isle III.', 4424, 901, NULL, NULL, NULL),
+   (18, 1, 1, 1, 'Boss 18', 'Boss de Inkwell Isle IV.', 5363, 358, NULL, NULL, NULL),
+   (19, 1, 1, 1, 'Boss 19', 'Boss de Inkwell Isle IV.', 5514, 450, NULL, NULL, NULL),
+   (20, 1, 1, 1, 'Boss 20', 'Boss de Inkwell Isle DLC.', 708, 843, NULL, NULL, NULL),
+   (21, 1, 1, 1, 'Boss 21', 'Boss de Inkwell Isle DLC.', 1393, 378, NULL, NULL, NULL),
+   (22, 1, 1, 1, 'Boss 22', 'Boss de Inkwell Isle DLC.', 1766, 476, NULL, NULL, NULL),
+   (23, 1, 1, 1, 'Boss 23', 'Boss de Inkwell Isle DLC.', 833, 1085, NULL, NULL, NULL),
+   (24, 1, 1, 1, 'Boss 24', 'Boss de Inkwell Isle DLC.', 1451, 896, NULL, NULL, NULL),
+   (25, 1, 1, 1, 'Boss 25', 'Boss de Inkwell Isle DLC.', 653, 431, NULL, NULL, NULL),
+
+   -- NPC
+   (26, 1, 1, 2, 'NPC 26', 'PNJ de Inkwell Isle I.', 372, 2112, NULL, NULL, NULL),
+   (27, 1, 1, 2, 'NPC 27', 'PNJ de Inkwell Isle I.', 849, 2227, NULL, NULL, NULL),
+   (28, 1, 1, 2, 'NPC 28', 'PNJ de Inkwell Isle I.', 1149, 2501, NULL, NULL, NULL),
+   (29, 1, 1, 2, 'NPC 29', 'PNJ de Inkwell Isle I.', 1300, 1863, NULL, NULL, NULL),
+   (30, 1, 1, 2, 'NPC 30', 'PNJ de Inkwell Isle I.', 1428, 2664, NULL, NULL, NULL),
+   (31, 1, 1, 2, 'NPC 31', 'PNJ de Inkwell Isle I.', 1616, 2243, NULL, NULL, NULL),
+   (32, 1, 1, 2, 'NPC 32', 'PNJ de Inkwell Isle I.', 2178, 1963, NULL, NULL, NULL),
+   (33, 1, 1, 2, 'NPC 33', 'PNJ de Inkwell Isle I.', 2488, 2128, NULL, NULL, NULL),
+   (34, 1, 1, 2, 'NPC 34', 'PNJ de Inkwell Isle II.', 3041, 2292, NULL, NULL, NULL),
+   (35, 1, 1, 2, 'NPC 35', 'PNJ de Inkwell Isle II.', 2098, 1780, NULL, NULL, NULL),
+   (36, 1, 1, 2, 'NPC 36', 'PNJ de Inkwell Isle II.', 2544, 1526, NULL, NULL, NULL),
+   (37, 1, 1, 2, 'NPC 37', 'PNJ de Inkwell Isle II.', 2965, 1736, NULL, NULL, NULL),
+   (38, 1, 1, 2, 'NPC 38', 'PNJ de Inkwell Isle III.', 3558, 1618, NULL, NULL, NULL),
+   (39, 1, 1, 2, 'NPC 39', 'PNJ de Inkwell Isle III.', 3824, 1198, NULL, NULL, NULL),
+   (40, 1, 1, 2, 'NPC 40', 'PNJ de Inkwell Isle III.', 3956, 2306, NULL, NULL, NULL),
+   (41, 1, 1, 2, 'NPC 41', 'PNJ de Inkwell Isle III.', 4724, 1744, NULL, NULL, NULL),
+   (42, 1, 1, 2, 'NPC 42', 'PNJ de Inkwell Isle III.', 3832, 1712, NULL, NULL, NULL),
+   (43, 1, 1, 2, 'NPC 43', 'PNJ de Inkwell Isle DLC.', 221, 357, NULL, NULL, NULL),
+   (44, 1, 1, 2, 'NPC 44', 'PNJ de Inkwell Isle DLC.', 945, 548, NULL, NULL, NULL),
+   (45, 1, 1, 2, 'NPC 45', 'PNJ de Inkwell Isle DLC.', 1494, 737, NULL, NULL, NULL),
+   (46, 1, 1, 2, 'NPC 46', 'PNJ de Inkwell Isle DLC.', 1059, 1059, NULL, NULL, NULL),
+   (47, 1, 1, 2, 'NPC 47', 'PNJ de Inkwell Isle DLC.', 1150, 331, NULL, NULL, NULL),
+
+   -- SHOPS
+   (48, 1, 1, 3, 'Boutique 1', 'Boutique de Inkwell Isle I.', 1113, 2314, NULL, NULL, NULL),
+   (49, 1, 1, 3, 'Boutique 2', 'Boutique de Inkwell Isle II.', 2348, 1701, NULL, NULL, NULL),
+   (50, 1, 1, 3, 'Boutique 3', 'Boutique de Inkwell Isle III.', 4053, 1622, NULL, NULL, NULL),
+   (51, 1, 1, 3, 'Boutique 4', 'Boutique de Inkwell Isle I.', 1019, 419, NULL, NULL, NULL),
+
+   -- MAUSOLÉES
+   (52, 1, 1, 4, 'Mausolée 1', 'Mausolée de Inkwell Isle I.', 1617, 2573, NULL, NULL, NULL),
+   (53, 1, 1, 4, 'Mausolée 2', 'Mausolée de Inkwell Isle II.', 2301, 1518, NULL, NULL, NULL),
+   (54, 1, 1, 4, 'Mausolée 3', 'Mausolée de Inkwell Isle III.', 4292, 1741, NULL, NULL, NULL);
 
 INSERT INTO Comments
    (comment_id, user_id, poi_id, content, created_at, updated_at)
