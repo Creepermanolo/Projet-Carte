@@ -135,6 +135,19 @@ CREATE TABLE User_POI_Progress(
    FOREIGN KEY(poi_id) REFERENCES Points_of_Interest(poi_id)
 );
 
+CREATE TABLE User_Zone_Progress (
+    user_id INT NOT NULL,
+    zone_id INT NOT NULL,
+    status ENUM('not_discovered', 'discovered')
+        NOT NULL DEFAULT 'not_discovered',
+    discovered_at DATETIME NULL,
+
+    PRIMARY KEY (user_id, zone_id),
+
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (zone_id) REFERENCES Map_Zones(zone_id)
+);
+
 INSERT INTO Users
    (user_id, user_mail, password, name, Max_zone)
 VALUES
@@ -360,8 +373,14 @@ INSERT INTO User_POI_Progress
    (user_id, poi_id, status, discovered_at, completed_at)
 VALUES
    (1, 1, 'completed', '2026-10-06 11:00:00', '2026-10-06 11:30:00');
-   
-   
+
+INSERT INTO User_Zone_Progress (user_id, zone_id, status)
+VALUES
+(1, 1, 'discovered'),
+(1, 2, 'not_discovered'),
+(1, 3, 'not_discovered'),
+(1, 4, 'not_discovered'),
+(1, 5, 'not_discovered');   
 
 #Test avec quelque requête simple:
 
